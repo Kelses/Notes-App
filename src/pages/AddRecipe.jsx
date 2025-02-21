@@ -10,27 +10,17 @@ const AddRecipe = () => {
   const navigate = useNavigate();
   console.log("AddNotePage:", categories);
 
-  const cats = [
-    {
-      value: categories[0],
-      label: categories[0],
-    },
-    {
-      value: categories[1],
-      label: categories[1],
-    },
-    {
-      value: categories[2],
-      label: categories[2],
-    },
-    { value: categories[3], label: categories[3] },
-  ];
+  const cats = categories.map((category) => ({
+    value: category,
+    label: category,
+  }));
+
   const [form, setForm] = useState({
     title: "",
     date: "",
     category: "",
-    ingredients: "", // New Field
-    time: "", // New Field
+    ingredients: "",
+    time: "",
     description: "",
   });
 
@@ -46,16 +36,16 @@ const AddRecipe = () => {
     e.preventDefault();
     const uniqueKey = `note_${Date.now()}`;
     localStorage.setItem(uniqueKey, JSON.stringify(form));
-    console.log("Stored note:", JSON.parse(localStorage.getItem(uniqueKey))); // Check the stored item
+    console.log("Stored note:", JSON.parse(localStorage.getItem(uniqueKey)));
     alert("The note was added!");
     navigate("/"); // Navigate to home
   };
 
   return (
-    <div className="bg-orange-100 text-black min-h-screen flex flex-col">
+    <div className="bg-[#FAF3E0] text-black min-h-screen flex flex-col">
       <Navbar />
       <section className="items-center flex flex-col px-4 py-10 flex-grow">
-        <div className="border border-light textLight rounded-xl w-full max-w-lg md:max-w-xl lg:max-w-2xl p-5 bg-orange-200">
+        <div className="border border-[#C19A6B] rounded-xl w-full max-w-lg md:max-w-xl lg:max-w-2xl p-5 bg-[#F5EDE0]">
           <form
             onSubmit={handleSubmit}
             className="flex flex-col px-4 pb-8 gap-5"
@@ -66,7 +56,7 @@ const AddRecipe = () => {
                 value={form.title}
                 onChange={handleChange}
                 name="title"
-                className="grow w-full"
+                className="grow w-full p-4 rounded-md border border-[#C19A6B] shadow-sm focus:outline-none focus:ring-2 focus:ring-[#C19A6B]"
                 placeholder="Title"
                 required
               />
@@ -79,7 +69,7 @@ const AddRecipe = () => {
                 onChange={handleChange}
                 type="date"
                 name="date"
-                className="grow w-full"
+                className="grow w-full p-4 rounded-md border border-[#C19A6B] shadow-sm focus:outline-none focus:ring-2 focus:ring-[#C19A6B]"
                 required
               />
             </label>
@@ -90,6 +80,16 @@ const AddRecipe = () => {
               placeholder="Select category"
               onChange={handleCategoryChange}
               className="w-full"
+              styles={{
+                control: (styles) => ({
+                  ...styles,
+                  borderColor: "#C19A6B",
+                  boxShadow: "none",
+                  "&:hover": {
+                    borderColor: "#C19A6B",
+                  },
+                }),
+              }}
             />
 
             {/* Ingredients */}
@@ -98,7 +98,7 @@ const AddRecipe = () => {
                 value={form.ingredients}
                 onChange={handleChange}
                 name="ingredients"
-                className="grow w-full"
+                className="grow w-full p-4 rounded-md border border-[#C19A6B] shadow-sm focus:outline-none focus:ring-2 focus:ring-[#C19A6B]"
                 placeholder="Ingredients"
                 required
               />
@@ -110,7 +110,7 @@ const AddRecipe = () => {
                 value={form.time}
                 onChange={handleChange}
                 name="time"
-                className="grow w-full"
+                className="grow w-full p-4 rounded-md border border-[#C19A6B] shadow-sm focus:outline-none focus:ring-2 focus:ring-[#C19A6B]"
                 placeholder="Time required (e.g., 30 mins)"
                 required
               />
@@ -122,7 +122,7 @@ const AddRecipe = () => {
                 value={form.description}
                 onChange={handleChange}
                 name="description"
-                className="grow w-full bg-bgInput h-48"
+                className="grow w-full bg-bgInput p-4 rounded-md border border-[#C19A6B] shadow-sm focus:outline-none focus:ring-2 focus:ring-[#C19A6B] h-48"
                 placeholder="Describe what you are going to do..."
                 required
               />
@@ -131,7 +131,7 @@ const AddRecipe = () => {
             {/* Submit Button */}
             <button
               type="submit"
-              className="bg-yellow-500 hover:bg-yellow-600 text-black font-semibold py-2 px-4 rounded-lg transition"
+              className="bg-[#C19A6B] hover:bg-[#5C4033] text-white font-semibold py-2 px-4 rounded-lg transition"
             >
               Add Recipe
             </button>

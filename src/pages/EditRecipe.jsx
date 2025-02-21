@@ -50,67 +50,89 @@ const EditRecipe = () => {
   if (!note) return <p>Loading...</p>;
 
   return (
-    <div className="bg-orange-100 text-black min-h-screen ">
+    <div className="bg-[#FAF3E0] text-black min-h-screen">
       <Navbar /> {/* Navbar component */}
-      <div className="p-6 max-w-4xl mx-auto flex-grow space-y-6">
-        <h2 className="text-3xl font-bold text-center mb-12">Edit Recipe</h2>
+      <div className="p-8 max-w-4xl mx-auto flex-grow space-y-6">
+        <h2 className="text-3xl font-bold text-center mb-12 text-[#5C4033]">
+          Edit Recipe
+        </h2>
 
         <div className="mb-6">
-          <label className="block text-lg font-medium mb-2">Title</label>
+          <label className="block text-lg font-medium mb-2 text-[#5C4033]">
+            Title
+          </label>
           <input
             type="text"
             name="title"
             value={note.title}
             onChange={handleChange}
-            className="w-full p-4 rounded-md border border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
+            className="w-full p-4 rounded-md border border-[#C19A6B] shadow-sm focus:outline-none focus:ring-2 focus:ring-[#C19A6B]"
           />
         </div>
 
         <div className="mb-6">
-          <label className="block text-lg font-medium mb-2">Category</label>
+          <label className="block text-lg font-medium mb-2 text-[#5C4033]">
+            Category
+          </label>
           <Select
             options={cats}
             value={cats.find((cat) => cat.value === note.category)} // Set the selected category
             onChange={handleCategoryChange}
             className="w-full"
+            styles={{
+              control: (styles) => ({
+                ...styles,
+                borderColor: "#C19A6B",
+                boxShadow: "none",
+                "&:hover": {
+                  borderColor: "#C19A6B",
+                },
+              }),
+            }}
           />
         </div>
 
         <div className="mb-6">
-          <label className="block text-lg font-medium mb-2">Ingredients</label>
+          <label className="block text-lg font-medium mb-2 text-[#5C4033]">
+            Ingredients
+          </label>
           <input
             type="text"
             name="ingredients"
             value={note.ingredients}
             onChange={handleChange}
-            className="w-full p-4 rounded-md border border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-600 "
+            className="w-full p-4 rounded-md border border-[#C19A6B] shadow-sm focus:outline-none focus:ring-2 focus:ring-[#C19A6B]"
           />
         </div>
 
         <div className="mb-6">
-          <label className="block text-lg font-medium mb-2">Time</label>
+          <label className="block text-lg font-medium mb-2 text-[#5C4033]">
+            Time
+          </label>
           <input
             type="text"
             name="time"
             value={note.time}
             onChange={handleChange}
-            className="w-full p-4 rounded-md border border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-600 "
+            className="w-full p-4 rounded-md border border-[#C19A6B] shadow-sm focus:outline-none focus:ring-2 focus:ring-[#C19A6B]"
           />
         </div>
 
         <div className="mb-6">
-          <label className="block text-lg font-medium mb-2">Description</label>
+          <label className="block text-lg font-medium mb-2 text-[#5C4033]">
+            Description
+          </label>
           <textarea
             name="description"
             value={note.description}
             onChange={handleChange}
-            className="w-full p-4 rounded-md border border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-600 h-80" // Adjust height here
+            className="w-full p-4 rounded-md border border-[#C19A6B] shadow-sm focus:outline-none focus:ring-2 focus:ring-[#C19A6B] h-80"
           />
         </div>
 
         <button
           onClick={handleSave}
-          className="bg-blue-700 text-white py-3 px-6 rounded-md text-lg hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-600"
+          className="bg-[#C19A6B] text-white py-3 px-6 rounded-md text-lg hover:bg-[#5C4033] focus:outline-none focus:ring-2 focus:ring-[#C19A6B]"
         >
           Save Changes
         </button>

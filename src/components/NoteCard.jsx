@@ -1,5 +1,4 @@
 import { useNavigate } from "react-router";
-
 import {
   FaCalendarAlt,
   FaUtensils,
@@ -24,43 +23,41 @@ const NoteCard = ({
 
   // Handle the "Edit" button click
   const handleEditClick = () => {
-    navigate(`/edit/${itemKey}`); // Navigate to the edit page with itemKey as the URL parameter
+    navigate(`/edit/${itemKey}`); // Navigate to the edit page with itemKey
   };
-  //const onDelete = () => {};
-  //const onEdit = () => {};
 
   return (
-    <div className="bg-amber-300 text-black rounded-xl p-6 shadow-lg border border-yellow-300">
+    <div className="bg-[#E2C9A8] text-[#5C4033] rounded-xl p-6 shadow-lg border border-[#5C4033]">
       {/* Title */}
-      <h2 className="text-2xl font-bold text-center border-b border-white/30 pb-2">
+      <h2 className="text-2xl font-bold text-center border-b border-[#5C4033] pb-2">
         {title}
       </h2>
 
       {/* Metadata */}
       <div className="text-sm mt-4 space-y-3">
-        <div className="flex items-center gap-2 bg-white/10 p-2 rounded-md border border-white/20">
-          <FaCalendarAlt className="text-white" />
+        <div className="flex items-center gap-2 bg-[#5C4033]/20 p-2 rounded-md border border-[#5C4033]">
+          <FaCalendarAlt className="text-[#5C4033]" />
           <span className="opacity-90">
             <span className="font-semibold">Date:</span> {date}
           </span>
         </div>
 
-        <div className="flex items-center gap-2 bg-white/10 p-2 rounded-md border border-white/20">
-          <FaUtensils className="text-white" />
+        <div className="flex items-center gap-2 bg-[#5C4033]/20 p-2 rounded-md border border-[#5C4033]">
+          <FaUtensils className="text-[#5C4033]" />
           <span className="opacity-90">
             <span className="font-semibold">Category:</span> {category}
           </span>
         </div>
 
-        <div className="flex items-center gap-2 bg-white/10 p-2 rounded-md border border-white/20">
-          <FaList className="text-white" />
+        <div className="flex items-center gap-2 bg-[#5C4033]/20 p-2 rounded-md border border-[#5C4033]">
+          <FaList className="text-[#5C4033]" />
           <span className="opacity-90">
             <span className="font-semibold">Ingredients:</span> {ingredients}
           </span>
         </div>
 
-        <div className="flex items-center gap-2 bg-white/10 p-2 rounded-md border border-white/20">
-          <FaClock className="text-white" />
+        <div className="flex items-center gap-2 bg-[#5C4033]/20 p-2 rounded-md border border-[#5C4033]">
+          <FaClock className="text-[#5C4033]" />
           <span className="opacity-90">
             <span className="font-semibold">Time:</span> {time}
           </span>
@@ -68,14 +65,14 @@ const NoteCard = ({
       </div>
 
       {/* Description */}
-      <p className="text-sm mt-4 bg-white/5 p-3 rounded-md border border-white/20">
+      <p className="text-sm mt-4 bg-[#5C4033]/10 p-3 rounded-md border border-[#5C4033]">
         {description}
       </p>
 
       {/* Buttons */}
       <div className="flex justify-end gap-3 mt-5">
         <button
-          className="p-3 bg-blue-700 hover:bg-blue-800 text-white rounded-full transition"
+          className="p-3 bg-[#5C4033] hover:bg-[#C19A6B] text-white rounded-full transition"
           onClick={handleEditClick}
           aria-label="Edit Note"
         >

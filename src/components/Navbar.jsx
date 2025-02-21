@@ -1,10 +1,8 @@
-import { Link, useNavigate, useLocation } from "react-router"; // Make sure to import useLocation
-import { useState } from "react";
-import { FiSearch } from "react-icons/fi";
+import { Link, useNavigate, useLocation } from "react-router";
 
 const Navbar = () => {
   const navigate = useNavigate();
-  const location = useLocation(); // Hook to access current URL
+  const location = useLocation();
 
   const handleAddNote = (e) => {
     e.preventDefault();
@@ -12,18 +10,18 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-gradient-to-r from-orange-500 via-red-500 to-yellow-500 text-white shadow-md">
+    <nav className="bg-[#D2B48C] text-[#5C4033] shadow-lg border-b border-[#C19A6B]">
       <div className="container mx-auto px-6 py-4 flex justify-between items-center">
         {/* Logo / Home Link */}
-        <Link to="/" className="text-2xl font-semibold">
-          🍽️ Recipes
+        <Link to="/" className="text-2xl font-bold tracking-wide">
+          🍽️ <span className="text-[#5C4033]">Recipes</span>
         </Link>
 
         {/* Conditionally render Add Recipe button */}
         {!location.pathname.includes("/add-note") && (
           <button
             onClick={handleAddNote}
-            className="bg-white text-orange-600 px-4 py-2 rounded-lg font-medium hover:bg-orange-200 transition"
+            className="text-[#5C4033] bg-[#F5EDE0] px-4 py-2 rounded-lg font-medium hover:bg-[#C19A6B] hover:text-white transition border border-[#C19A6B]"
           >
             Add Recipe
           </button>

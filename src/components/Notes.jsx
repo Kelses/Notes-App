@@ -1,19 +1,22 @@
 import { useState, useEffect } from "react";
-import { FaUtensils } from "react-icons/fa"; // Import the icon for styling buttons
+import { FaUtensils } from "react-icons/fa";
 import NoteCard from "../components/NoteCard";
 
 const categoryColors = {
-  "Mediterranean Cuisine": "bg-gradient-to-r from-pink-400 to-red-500",
-  "Asian Cuisine": "bg-gradient-to-r from-red-500 to-pink-400",
-  "Fusion Cuisine": "bg-gradient-to-r from-pink-400 to-red-500",
-  "Vegetarian/Vegan Cuisine": "bg-gradient-to-r from-red-500 to-pink-400",
-  "All Recipes": "bg-gradient-to-r from-pink-400 to-red-500",
+  "Mediterranean Cuisine": "bg-[#D2B48C] hover:bg-[#C19A6B]",
+  "Asian Cuisine": "bg-[#D2B48C] hover:bg-[#C19A6B]",
+  "Fusion Cuisine": "bg-[#D2B48C] hover:bg-[#C19A6B]",
+  "Vegetarian/Vegan Cuisine": "bg-[#D2B48C] hover:bg-[#C19A6B]",
+  "All Recipes": "bg-[#D2B48C] hover:bg-[#C19A6B]",
 };
 
 const Notes = () => {
   const [notes, setNotes] = useState({});
-  const [categoryFilter, setCategoryFilter] = useState(""); // New state for category filter
+  const [categoryFilter, setCategoryFilter] = useState(""); //  state for category filter
   const [filteredNotes, setFilteredNotes] = useState([]);
+  const [categoryText, setCategoryText] = useState(
+    "Discover Delicious Recipes From Every Corner of the World"
+  ); // New state for category-specific text
 
   const getAllItemsFromLocalStorage = () => {
     const items = {};
@@ -42,8 +45,12 @@ const Notes = () => {
         (note) => note.category.toLowerCase() === categoryFilter.toLowerCase()
       );
       setFilteredNotes(filtered);
+      setCategoryText(`Check Our Delicious ${categoryFilter} Recipes`); // Update text when category is selected
     } else {
       setFilteredNotes(Object.values(notes)); // Show all notes if no category is selected
+      setCategoryText(
+        "Discover Delicious Recipes From Every Corner of the World"
+      ); // Default text
     }
   }, [categoryFilter, notes]); // Run the filter whenever categoryFilter or notes change
 
@@ -62,45 +69,27 @@ const Notes = () => {
   const onEdit = () => {};
 
   return (
-    <div>
+    <div className="bg-[#F5EDE0] min-h-screen p-6 text-[#5C4033]">
       {/* Category Filter Buttons */}
       <div className="flex justify-center gap-6 mb-8 flex-wrap">
-        <button
-          onClick={() => setCategoryFilter("Asian Cuisine")}
-          className={`flex items-center gap-3 px-6 py-4 rounded-full text-white font-semibold shadow-md transform transition hover:scale-105 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 ${categoryColors["Asian Cuisine"]}`}
-        >
-          <FaUtensils className="w-6 h-6" />
-          Asian Cuisine
-        </button>
-        <button
-          onClick={() => setCategoryFilter("Fusion Cuisine")}
-          className={`flex items-center gap-3 px-6 py-4 rounded-full text-white font-semibold shadow-md transform transition hover:scale-105 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 ${categoryColors["Fusion Cuisine"]}`}
-        >
-          <FaUtensils className="w-6 h-6" />
-          Fusion Cuisine
-        </button>
-        <button
-          onClick={() => setCategoryFilter("Mediterranean Cuisine")}
-          className={`flex items-center gap-3 px-6 py-4 rounded-full text-white font-semibold shadow-md transform transition hover:scale-105 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 ${categoryColors["Mediterranean Cuisine"]}`}
-        >
-          <FaUtensils className="w-6 h-6" />
-          Mediterranean Cuisine
-        </button>
-        <button
-          onClick={() => setCategoryFilter("Vegetarian/Vegan Cuisine")}
-          className={`flex items-center gap-3 px-6 py-4 rounded-full text-white font-semibold shadow-md transform transition hover:scale-105 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 ${categoryColors["Vegetarian/Vegan Cuisine"]}`}
-        >
-          <FaUtensils className="w-6 h-6" />
-          Vegetarian/Vegan Cuisine
-        </button>
-        <button
-          onClick={() => setCategoryFilter("")}
-          className={`flex items-center gap-3 px-6 py-4 rounded-full text-white font-semibold shadow-md transform transition hover:scale-105 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 ${categoryColors["All Recipes"]}`}
-        >
-          <FaUtensils className="w-6 h-6" />
-          All Recipes
-        </button>
+        {Object.keys(categoryColors).map((category) => (
+          <button
+            key={category}
+            onClick={() =>
+              setCategoryFilter(category === "All Recipes" ? "" : category)
+            }
+            className={`flex items-center gap-3 px-6 py-4 rounded-full font-semibold shadow-md transform transition hover:scale-105 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 ${categoryColors[category]}`}
+          >
+            <FaUtensils className="w-6 h-6" />
+            {category}
+          </button>
+        ))}
       </div>
+
+      {/* Dynamic Heading */}
+      <h2 className="text-center text-5xl font-bold text-[#5C4033] mt-4 mb-16">
+        {categoryText}
+      </h2>
 
       {/* Render filtered notes */}
       <div
@@ -114,16 +103,17 @@ const Notes = () => {
         ) : (
           filteredNotes.map((item) => (
             <NoteCard
-              key={item.id} // React key remains for rendering list
-              itemKey={item.id} // Pass the key explicitly as a prop to NoteCard
+              key={item.id}
+              itemKey={item.id}
               title={item.title}
               date={item.date}
               category={item.category}
               description={item.description}
-              ingredients={item.ingredients} // New field
-              time={item.time} // New field
+              ingredients={item.ingredients}
+              time={item.time}
               onEdit={() => onEdit(item.id)}
               onDelete={() => onDelete(item.id)}
+              className="bg-[#FAF3E0] p-4 rounded-lg shadow-md"
             />
           ))
         )}

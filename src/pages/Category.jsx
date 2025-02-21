@@ -11,7 +11,6 @@ const Category = () => {
   useEffect(() => {
     // Get data from localStorage
     const storedItems = JSON.parse(localStorage.getItem("notes")) || [];
-    console.log("Stored Items from localStorage:", storedItems); // Log to check what is retrieved
     setItems(storedItems);
   }, []);
 
