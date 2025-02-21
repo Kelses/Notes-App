@@ -23,7 +23,7 @@ export const CategoryProvider = ({ children }) => {
 
 function App() {
   return (
-    <Router>
+    <>
       {/* ✅ Corrected from BrowserRouter */}
       <CategoryProvider>
         <Routes>
@@ -35,7 +35,7 @@ function App() {
           {/* Dynamic route */}
         </Routes>
       </CategoryProvider>
-    </Router>
+    </>
   );
 }
 
