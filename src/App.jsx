@@ -1,5 +1,10 @@
 import { createContext, useState } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  BrowserRouter,
+} from "react-router";
 import Home from "./pages/Home";
 import Category from "./pages/Category";
 import AddRecipe from "./pages/AddRecipe";

@@ -12,18 +12,18 @@ const categoryColors = {
 
 const Notes = () => {
   const [notes, setNotes] = useState({});
-  const [categoryFilter, setCategoryFilter] = useState(""); //  state for category filter
+  const [categoryFilter, setCategoryFilter] = useState("");
   const [filteredNotes, setFilteredNotes] = useState([]);
   const [categoryText, setCategoryText] = useState(
     "Discover Delicious Recipes From Every Corner of the World"
-  ); // New state for category-specific text
+  );
 
   const getAllItemsFromLocalStorage = () => {
     const items = {};
     for (let i = 0; i < localStorage.length; i++) {
       const key = localStorage.key(i);
       try {
-        const value = JSON.parse(localStorage.getItem(key)); // Try parsing JSON
+        const value = JSON.parse(localStorage.getItem(key));
         if (value) items[key] = { ...value, id: key };
       } catch (error) {
         console.error(`Error parsing item ${key}:`, error);
@@ -35,7 +35,7 @@ const Notes = () => {
   useEffect(() => {
     const allNotes = getAllItemsFromLocalStorage();
     console.log("Loaded notes from localStorage:", allNotes);
-    setNotes(allNotes); // Load data on mount
+    setNotes(allNotes);
   }, []);
 
   useEffect(() => {
@@ -67,6 +67,21 @@ const Notes = () => {
   };
 
   const onEdit = () => {};
+
+  useEffect(() => {
+    let sortedNotes = Object.values(notes);
+
+    // Sort by date (newest first)
+    sortedNotes.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+    if (categoryFilter) {
+      sortedNotes = sortedNotes.filter(
+        (note) => note.category.toLowerCase() === categoryFilter.toLowerCase()
+      );
+    }
+
+    setFilteredNotes(sortedNotes);
+  }, [categoryFilter, notes]); // Run whenever categoryFilter or notes change
 
   return (
     <div className="bg-[#F5EDE0] min-h-screen p-6 text-[#5C4033]">
